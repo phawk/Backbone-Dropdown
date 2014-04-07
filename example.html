@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Backbone.Dropdown example</title>
+    <meta charset="utf8">
+
+    <link rel="stylesheet" type="text/css" href="lib/dropdown.css">
+    <style type="text/css">
+    body {
+        font-family: sans-serif;
+    }
+
+    .container {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 200px;
+        height: 100px;
+        background: #f9f9f9;
+        padding: 20px;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="event">Select an item:</div>
+    </div>
+
+    <script type="text/javascript" src="vendor/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="vendor/backbone-min.js"></script>
+    <script type="text/javascript" src="lib/dropdown.js"></script>
+    <script type="text/javascript">
+        var dropdown, items;
+
+        items = new Backbone.Collection([
+            { id: 12, name: 'apple' },
+            { id: 13, name: 'orange' },
+            { id: 14, name: 'pear' },
+            { id: 15, name: 'grape' },
+            { id: 16, name: 'banana' }
+        ]);
+
+        dropdown = new Backbone.Dropdown({
+            collection: items,
+            title: 'name'
+        });
+
+        dropdown.on('select', function(model) {
+            $('.event').html("Selected: "+ model.get('name'));
+        });
+
+        $('.container').append(dropdown.render().$el);
+    </script>
+</body>
+</html>
